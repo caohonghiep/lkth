@@ -10,5 +10,6 @@ export class User extends Model{
   email: string;
   permanent_address: string;
   temporary_address: string;
+  communityIds: Array<string>
 
 }

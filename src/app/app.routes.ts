@@ -24,10 +24,10 @@ export const MY_ROUTES: MyRoute[] =[
   { path: 'user-profile', component: UserProfileComponent, title: 'Thông Tin Cá Nhân',  icon:'person' },
   { path: 'tree', component: UsersDiagramComponent, title: 'Sơ Đồ Hội Viên',  icon:'fa-sitemap' },
   { path: 'add-user', component: AddUserComponent, title: 'Thêm Hội Viên',  icon:'person_add' },
-  //{ path: 'table', component: TableComponent, title: 'Table List',  icon:'content_paste' },
-  //{ path: 'icons', component: IconsComponent, title: 'Icons',  icon:'bubble_chart' },
-  //{ path: 'notifications', component: NotificationsComponent, title: 'Notifications',  icon:'notifications' },
-  //{ path: 'typography', component: TypographyComponent, title: 'Typography',  icon:'library_books' },
+  { path: 'table', component: TableComponent, title: 'Table List',  icon:'content_paste' },
+  { path: 'icons', component: IconsComponent, title: 'Icons',  icon:'bubble_chart' },
+  { path: 'notifications', component: NotificationsComponent, title: 'Notifications',  icon:'notifications' },
+  { path: 'typography', component: TypographyComponent, title: 'Typography',  icon:'library_books' },
   { path: 'maps', component: MapsComponent, title: 'Maps',  icon:'location_on' },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
 ]

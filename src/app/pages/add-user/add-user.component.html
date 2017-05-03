@@ -8,7 +8,8 @@
             <p class="category">Thông tin cá nhân của hội viên mới.</p>
           </div>
           <div class="card-content">
-            <form>
+
+              <!--
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group form-black label-floating is-empty">
@@ -23,7 +24,7 @@
                   </div>
                 </div>
               </div>
-
+              -->
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group form-black label-floating is-empty">
@@ -33,11 +34,11 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group form-black label-floating is-empty">
-                    <!--<label class="control-label"> Ngày sinh</label>-->
-                    <!--<input type="date" class="form-control" >-->
-                    <md-input-container >
-                      <input  type="date" mdInput placeholder="Number"  >
-                    </md-input-container>
+                    <label class="control-label"> Ngày sinh</label>
+                    <input type="date" class="form-control" [(ngModel)]="user.birthday"  >
+                    <!--<md-input-container >-->
+                      <!--<input  type="date" mdInput placeholder="Number"  >-->
+                    <!--</md-input-container>-->
                   </div>
                 </div>
               </div>
@@ -45,21 +46,21 @@
                 <div class="col-md-4">
                   <div class="form-group form-black label-floating is-empty">
                     <label class="control-label">CMND</label>
-                    <input type="text" class="form-control" >
+                    <input type="text" class="form-control" [(ngModel)]="user.identityNumber">
                   </div>
                 </div>
 
                 <div class="col-md-4">
                   <div class="form-group form-black label-floating is-empty">
                     <label class="control-label">Ngày cấp</label>
-                    <input type="text" class="form-control" >
+                    <input type="date" class="form-control" [(ngModel)]="user.issue_date">
                   </div>
                 </div>
 
                 <div class="col-md-4">
                   <div class="form-group form-black label-floating is-empty">
                     <label class="control-label">Nơi cấp</label>
-                    <input type="text" class="form-control" >
+                    <input type="text" class="form-control" [(ngModel)]="user.issued_by">
                   </div>
                 </div>
               </div>
@@ -68,7 +69,7 @@
                 <div class="col-md-12">
                   <div class="form-group form-black label-floating is-empty">
                     <label class="control-label">Địa chỉ Thường Trú</label>
-                    <input type="text" class="form-control" >
+                    <input type="text" class="form-control" [(ngModel)]="user.permanent_address">
                   </div>
                 </div>
               </div>
@@ -77,13 +78,13 @@
                 <div class="col-md-12">
                   <div class="form-group form-black label-floating is-empty">
                     <label class="control-label"> Địa chỉ Tạm Trú</label>
-                    <input type="text" class="form-control" >
+                    <input type="text" class="form-control" [(ngModel)]="user.temporary_address">
                   </div>
                 </div>
               </div>
-              <button type="submit" class="btn btn-danger pull-right">Thêm Hội Viên</button>
+              <button type="submit" class="btn btn-danger pull-right" (click)="createUser()">Thêm Hội Viên</button>
               <div class="clearfix"></div>
-            </form>
+
           </div>
         </div>
       </div>

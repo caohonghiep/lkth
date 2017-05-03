@@ -29,9 +29,12 @@
         "styles.scss"
       ],
       "scripts": [
+        "assets/js/moment-with-locales.js",
         "../node_modules/jquery/dist/jquery.js",
         "../node_modules/bootstrap/dist/js/bootstrap.js",
+        "assets/js/bootstrap-notify.js",
         "assets/js/material.min.js",
+        "assets/js/mdl-datepicker.js",
         "assets/js/chartist.min.js",
         "assets/js/material-dashboard.js",
         "assets/lib/raphael/raphael.min.js"

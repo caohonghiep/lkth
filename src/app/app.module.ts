@@ -13,6 +13,8 @@ import {SidebarComponent} from "./components/sidebar/sidebar.component";
 import {NavbarComponent} from "./components/navbar/navbar.component";
 import {FooterComponent} from "./components/footer/footer.component";
 import {UserDataAccessService} from "./services/user-data-access.service";
+import {CommunityDataAccessService} from "./services/community-data-access.service";
+import {CommonService} from "./services/common.service";
 
 const COMPONENTS = PAGE_COMPONENTS.concat([
   AppComponent,
@@ -37,7 +39,9 @@ const COMPONENTS = PAGE_COMPONENTS.concat([
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},
     //DataAccessService,
-    UserDataAccessService
+    UserDataAccessService,
+    CommunityDataAccessService,
+    CommonService
   ],
   bootstrap: [AppComponent]
 })
