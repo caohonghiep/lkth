@@ -1,2 +1,50 @@
 
-<tree-diagram [data]="treeData"></tree-diagram>
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header" data-background-color="purple">
+            <h4 class="title">Sơ Đồ Hội Viên</h4>
+            <p class="category">.</p>
+          </div>
+          <div class="card-content">
+            <form>
+              <div class="row">
+                <div class="col-md-12">
+                    <tree-diagram diagramId="diagram-1" [data]="treeData1"></tree-diagram>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header" data-background-color="purple">
+            <h4 class="title">Sơ Đồ Hội Viên</h4>
+            <p class="category">.</p>
+          </div>
+          <div class="card-content">
+            <form>
+              <div class="row">
+                <div class="col-md-12">
+                  <tree-diagram diagramId="diagram-2" [data]="treeData2" orientation="WEST"></tree-diagram>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+

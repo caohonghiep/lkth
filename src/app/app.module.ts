@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import {SidebarComponent} from "./components/sidebar/sidebar.component";
 import {NavbarComponent} from "./components/navbar/navbar.component";
 import {FooterComponent} from "./components/footer/footer.component";
+import {UserDataAccessService} from "./services/user-data-access.service";
 
 const COMPONENTS = PAGE_COMPONENTS.concat([
   AppComponent,
@@ -33,7 +34,11 @@ const COMPONENTS = PAGE_COMPONENTS.concat([
     HttpModule,
     BrowserModule
   ],
-  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
+  providers: [
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
+    //DataAccessService,
+    UserDataAccessService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
