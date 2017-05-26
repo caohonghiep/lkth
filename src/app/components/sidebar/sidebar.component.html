@@ -10,7 +10,7 @@
     <div class="nav-container">
         <ul class="nav">
           <template ngFor let-menuItem [ngForOf]="menuItems" let-i="index">
-            <li *ngIf="menuItem.path!==''" class="{{isFocus(menuItem.path)?'active':''}}">
+            <li *ngIf="menuItem.path!=='' && menuItem.path!=='login'" class="{{isFocus(menuItem.path)?'active':''}}">
               <a  [routerLink]="[menuItem.path]">
                 <div *ngIf="menuItem.icon.indexOf('fa')==-1;then content else other_content">here is ignored</div>
                 <ng-template #content>

@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import {UserDataAccessService} from "../../data-access/user-data-access.service";
+import {TreeDataAccessService} from "../../data-access/tree-data-access.service";
+import {CommonService} from "../../services/common.service";
+import {AuthenticationService} from "../../services/authentication.service";
+import {Queue} from "../../models/Queue";
+import {isUndefined} from "util";
+import {TreeService} from "../../services/tree.service";
 
 @Component({
   selector: 'app-users-tree-diagram',
@@ -7,7 +14,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsersDiagramComponent implements OnInit {
 
-  treeData1:Object= {
+  treeData1:Object
+    /*
+    = {
     text: {
       name: 'Mark Hill',
       title: 'Chief executive officer',
@@ -154,8 +163,10 @@ export class UsersDiagramComponent implements OnInit {
       }
     ]
   };
-
-  treeData2:Object= {
+*/
+  treeData2:Object
+    /*
+    = {
     text: {
       name: 'Mark Hill',
       title: 'Chief executive officer',
@@ -302,10 +313,63 @@ export class UsersDiagramComponent implements OnInit {
       }
     ]
   };
-  constructor() { }
+*/
 
-  ngOnInit() {
-    //this.treeData =
+  constructor(private userDataAccess: UserDataAccessService,
+              private treeService: TreeService,
+              private commonService:CommonService,
+              private authenticationService: AuthenticationService) { }
+
+  async ngOnInit() {
+    let loginUser = await this.authenticationService.getLoginUser();
+    let activeTreeId = loginUser.treeIds[loginUser.treeIds.length-1];
+
+    if(!this.treeData1){
+      let tree = await this.treeService.getTree(activeTreeId);
+      this.treeData1 = await this.customDiagramData(tree);
+    }
+
+
+    if(!this.treeData2){
+      let directTree = await this.treeService.getDirectTree(activeTreeId);
+      this.treeData2 = await this.customDiagramData(directTree);
+    }
 
   }
+
+  async customDiagramData(root){
+    let queue: Queue = new Queue();
+    queue.push(root);
+
+    let node;
+    do{
+      node = queue.pop();
+      node.user = await this.userDataAccess.get(node.userId);
+      node.text = {
+        name: node.user.memberId?'Mã số: ' + node.user.memberId :'',
+        title: node.user.username?'Tên: ' + node.user.username:'',
+        contact: node.user.phone?'Số ĐT: ' + node.user.phone:''
+      }
+
+      Object.keys(node).forEach(key=>{
+        if(!['text','children'].includes(key)){
+          delete node[key];
+        }
+      })
+
+      node.image= './assets/headshots/2.jpg';
+      node.HTMLclass= 'light-gray';
+
+      if(Array.isArray(node.children)){
+        node.collapsed = true;
+        node.children.forEach(child=>{
+          queue.push(child);
+        })
+      }
+
+    }while(queue.count()>0)
+
+    return root;
+  }
+
 }

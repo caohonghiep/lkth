@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import {MY_ROUTES} from "../../app.routes";
+import {EventsService} from "../../services/events.service";
+import {AuthenticationService} from "../../services/authentication.service";
 
 @Component({
     selector: 'navbar-cmp',
@@ -9,9 +11,9 @@ import {MY_ROUTES} from "../../app.routes";
 
 export class NavbarComponent implements OnInit{
     private listTitles: any[];
-    location: Location;
-    constructor(location:Location) {
-        this.location = location;
+    constructor(private location:Location,
+                private eventsService: EventsService,
+                private authenticationService: AuthenticationService) {
     }
     ngOnInit(){
         this.listTitles = MY_ROUTES.filter(listTitle => listTitle);
@@ -23,9 +25,13 @@ export class NavbarComponent implements OnInit{
         }
         for(var item = 0; item < this.listTitles.length; item++){
             if(this.listTitles[item].path === title){
-                return this.listTitles[item].title;
+              return this.listTitles[item].title;
             }
         }
-        return 'Dashboard';
+      return 'Dashboard';
     }
+
+  logout(){
+    this.authenticationService.logout();
+  }
 }

@@ -1,18 +1,31 @@
-<div class="wrapper">
-  <div class="sidebar" data-color='purple' data-image="">
-    <sidebar-cmp></sidebar-cmp>
-    <div class="sidebar-background" style="background-image: url(../assets/img/sidebar-3.jpg)"></div>
-  </div>
-  <div class="main-panel">
-    <navbar-cmp></navbar-cmp>
-    <router-outlet></router-outlet>
-    <div *ngIf="isMaps('/maps')">
-      <footer-cmp></footer-cmp>
+
+<!--<div *ngIf="isLoggedIn; then content else login">here is ignored</div>-->
+
+  <div class="wrapper">
+    <div *ngIf="isLoggedIn" class="sidebar" data-color='purple' data-image="">
+      <sidebar-cmp></sidebar-cmp>
+      <div class="sidebar-background" style="background-image: url(../assets/img/sidebar-3.jpg)"></div>
+    </div>
+    <div class="main-panel" [class.full-width]="!isLoggedIn">
+      <navbar-cmp *ngIf="isLoggedIn"></navbar-cmp>
+      <router-outlet></router-outlet>
+      <div *ngIf="isMaps('/maps')">
+        <footer-cmp></footer-cmp>
+      </div>
     </div>
   </div>
-</div>
+
+
+
+
+
+
+<!--
 <md-input-container >
   <input  type="date" mdInput placeholder="Number"  >
 </md-input-container>
+-->
+
+
 
 

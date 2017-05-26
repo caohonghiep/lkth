@@ -1,15 +1,23 @@
 import {Model} from "./Model";
 export class User extends Model{
-  patron:string
-  identityNumber: string;
-  issue_date: Date;
-  issued_by: string;
+  createBy:string;
+
+  //profile information
   username: string;
+  memberId: string;
   birthday: Date;
+
+  //identity information
+  identityNumber: string;
+  identityIssueDate: Date;
+  identityIssuedBy: string;
+
+  //contract information
   phone: string;
   email: string;
-  permanent_address: string;
-  temporary_address: string;
-  communityIds: Array<string>
+  permanentAddress: string;
+  temporaryAddress: string;
+
+  treeIds: Array<string>//id in tree
 
 }

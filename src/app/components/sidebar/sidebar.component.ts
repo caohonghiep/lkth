@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {debug} from "util";
 import {MY_ROUTES} from "../../app.routes";
 import {Location} from "@angular/common";
+import {EventsService} from "../../services/events.service";
 
 declare var $:any;
 @Component({
@@ -13,7 +14,7 @@ declare var $:any;
 export class SidebarComponent implements OnInit {
   private _ready:boolean;
   public menuItems: any[];
-    constructor(private location: Location){}
+    constructor(private location: Location, private eventsService: EventsService){}
     ngOnInit() {
         $.getScript('../../assets/js/sidebar-moving-tab.js');
         this.menuItems = MY_ROUTES.filter(menuItem => menuItem);
@@ -22,5 +23,9 @@ export class SidebarComponent implements OnInit {
     let p = this.location.path();
     p = p.slice( 1 );
     return path === p;
+  }
+
+  logout(){
+    this.eventsService.logoutEvent.trigger();
   }
 }

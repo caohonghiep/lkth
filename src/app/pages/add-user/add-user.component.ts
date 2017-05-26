@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from "../../models/User";
-import {UserDataAccessService} from "../../services/user-data-access.service";
+import {UserDataAccessService} from "../../data-access/user-data-access.service";
 import {CommonService} from "../../services/common.service";
+import {AuthenticationService} from "../../services/authentication.service";
+import {Tree} from "../../models/Tree";
+import {TreeService} from "../../services/tree.service";
+import {TreeDataAccessService} from "../../data-access/tree-data-access.service";
+import {UserService} from "../../services/user.service";
 
 @Component({
   selector: 'add-user',
@@ -10,15 +15,40 @@ import {CommonService} from "../../services/common.service";
 })
 export class AddUserComponent implements OnInit {
 
+  public topOfRoot: boolean= false;
   public user:User = new User();
-  constructor(private userDataAccess: UserDataAccessService, private commonService:CommonService) { }
+  public loginUser ;
+  constructor(private userDataAccess: UserDataAccessService,
+              private treeService: TreeService,
+              private commonService:CommonService,
+              private authenticationService: AuthenticationService,
+              private userService: UserService) {
+  }
 
-  ngOnInit() {
+  async ngOnInit() {
+   this.loginUser = await this.authenticationService.getLoginUser();
   }
 
   async createUser(){
-    await this.userDataAccess.post(this.user);
+
+    this.userService.createUser(this.loginUser, this.user);
+
+    //Todo Renew
+
+    this.user = new User;
     this.commonService.showNotification('Tài khoản mới đã tạo thành công.', 'top','right', 'success')
   }
+
+  async create1023User(){
+    let startTime = new Date().getMilliseconds();
+    for(let i =8 ;i<1050; i++ ){
+      this.user.username = "Name Name " +i
+      this.user.phone = i+"" +i+""+i
+      await this.createUser();
+    }
+
+    console.log('Time 1111111:'+(new Date().getMilliseconds() - startTime));
+  }
+
 
 }

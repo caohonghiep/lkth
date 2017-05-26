@@ -1,13 +1,34 @@
 import { Component, OnInit } from '@angular/core';
+import {User} from "../../models/User";
+import {AuthenticationService} from "../../services/authentication.service";
+import {CommonService} from "../../services/common.service";
+import {TreeDataAccessService} from "../../data-access/tree-data-access.service";
+import {UserDataAccessService} from "../../data-access/user-data-access.service";
 
 @Component({
     selector: 'user-profile-cmp',
-    templateUrl: './user-profile.component.html'
+    templateUrl: './user-profile.component.html',
+  styleUrls: ['./user-profile.component.sass']
 })
 
 export class UserProfileComponent implements OnInit{
-    ngOnInit(){
-        // $.getScript('../../../assets/js/material-dashboard.js');
 
-    }
+  public loginUser:User = new User();
+  constructor(private userDataAccess: UserDataAccessService,
+              private treeDataAccess: TreeDataAccessService,
+              private commonService:CommonService,
+              private authenticationService: AuthenticationService) {
+  }
+
+  async ngOnInit(){
+    this.loginUser = await this.authenticationService.getLoginUser();
+    // $.getScript('../../../assets/js/material-dashboard.js');
+
+  }
+
+  async update(){
+    await this.userDataAccess.put(this.loginUser._id, this.loginUser);
+    this.commonService.showNotification('Đã Cập Nhật Xong!', 'top','right', 'success')
+  }
+
 }

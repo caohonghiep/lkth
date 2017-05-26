@@ -9,81 +9,104 @@
           </div>
           <div class="card-content">
 
-              <!--
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group form-black label-floating is-empty">
-                    <label class="control-label">Người bảo trợ</label>
-                    <input type="text" class="form-control" >
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group form-black label-floating is-empty">
-                    <label class="control-label">Người chỉ định</label>
-                    <input type="text" class="form-control" >
-                  </div>
+            <!--
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group form-black label-floating is-empty">
+                  <label class="control-label">Người bảo trợ</label>
+                  <input type="text" class="form-control" >
                 </div>
               </div>
-              -->
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group form-black label-floating is-empty">
-                    <label class="control-label"> Họ và Tên</label>
-                    <input type="text" class="form-control" [(ngModel)]="user.username" >
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group form-black label-floating is-empty">
-                    <label class="control-label"> Ngày sinh</label>
-                    <input type="date" class="form-control" [(ngModel)]="user.birthday"  >
-                    <!--<md-input-container >-->
-                      <!--<input  type="date" mdInput placeholder="Number"  >-->
-                    <!--</md-input-container>-->
-                  </div>
+              <div class="col-md-6">
+                <div class="form-group form-black label-floating is-empty">
+                  <label class="control-label">Người chỉ định</label>
+                  <input type="text" class="form-control" >
                 </div>
               </div>
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="form-group form-black label-floating is-empty">
-                    <label class="control-label">CMND</label>
-                    <input type="text" class="form-control" [(ngModel)]="user.identityNumber">
-                  </div>
+            </div>
+            -->
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group form-black label-floating is-empty">
+                  <label class="control-label"> Họ và Tên</label>
+                  <input type="text" class="form-control" [(ngModel)]="user.username" >
                 </div>
-
-                <div class="col-md-4">
-                  <div class="form-group form-black label-floating is-empty">
-                    <label class="control-label">Ngày cấp</label>
-                    <input type="date" class="form-control" [(ngModel)]="user.issue_date">
-                  </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group form-black label-floating is-empty">
+                  <label class="control-label"> Ngày sinh </label>
+                  <input type="date" class="form-control" [(ngModel)]="user.birthday"  >
                 </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group form-black label-floating is-empty">
+                  <label class="control-label"> Số Điện Thoại </label>
+                  <input type="text" class="form-control" [(ngModel)]="user.phone" >
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group form-black label-floating is-empty">
+                  <label class="control-label"> Email </label>
+                  <input type="text" class="form-control" [(ngModel)]="user.email"  >
+                </div>
+              </div>
+            </div>
 
-                <div class="col-md-4">
-                  <div class="form-group form-black label-floating is-empty">
-                    <label class="control-label">Nơi cấp</label>
-                    <input type="text" class="form-control" [(ngModel)]="user.issued_by">
-                  </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group form-black label-floating is-empty">
+                  <label class="control-label">CMND</label>
+                  <input type="text" class="form-control" [(ngModel)]="user.identityNumber">
                 </div>
               </div>
 
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group form-black label-floating is-empty">
-                    <label class="control-label">Địa chỉ Thường Trú</label>
-                    <input type="text" class="form-control" [(ngModel)]="user.permanent_address">
-                  </div>
+              <div class="col-md-4">
+                <div class="form-group form-black label-floating is-empty">
+                  <label class="control-label">Ngày cấp</label>
+                  <input type="date" class="form-control" [(ngModel)]="user.issueDate">
                 </div>
               </div>
 
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group form-black label-floating is-empty">
-                    <label class="control-label"> Địa chỉ Tạm Trú</label>
-                    <input type="text" class="form-control" [(ngModel)]="user.temporary_address">
-                  </div>
+              <div class="col-md-4">
+                <div class="form-group form-black label-floating is-empty">
+                  <label class="control-label">Nơi cấp</label>
+                  <input type="text" class="form-control" [(ngModel)]="user.issuedBy">
                 </div>
               </div>
-              <button type="submit" class="btn btn-danger pull-right" (click)="createUser()">Thêm Hội Viên</button>
-              <div class="clearfix"></div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group form-black label-floating is-empty">
+                  <label class="control-label">Địa chỉ Thường Trú</label>
+                  <input type="text" class="form-control" [(ngModel)]="user.permanent_address">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group form-black label-floating is-empty">
+                  <label class="control-label"> Địa chỉ Tạm Trú</label>
+                  <input type="text" class="form-control" [(ngModel)]="user.temporary_address">
+                </div>
+              </div>
+            </div>
+
+            <div class="row" *ngIf="loginUser.role==='admin'">
+              <div class="col-md-4">
+                <div class="form-group form-black label-floating is-empty">
+                  <label class="control-label">Tao Ma Dinh</label>
+                  <input type="checkbox" class="form-control" [(ngModel)]="topOfRoot">
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-danger pull-right" (click)="createUser()">Thêm Hội Viên</button>
+            <!--<button type="submit" class="btn btn-danger pull-right" (click)="create1023User()">Thêm Nhieu Hội Viên</button>-->
+            <div class="clearfix"></div>
 
           </div>
         </div>

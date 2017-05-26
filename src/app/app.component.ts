@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {LocationStrategy, PlatformLocation, Location} from '@angular/common';
+import {EventsService} from "./services/events.service";
+import {AuthenticationService} from "./services/authentication.service";
 
 declare var $: any;
 @Component({
@@ -8,7 +10,7 @@ declare var $: any;
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent implements OnInit{
-  location: Location;
+  isLoggedIn=false;
   treeData=
     {
       text: {
@@ -157,12 +159,25 @@ export class AppComponent implements OnInit{
         }
       ]
     }
-  constructor(location: Location) {
-    this.location = location;
+  constructor(private location: Location,
+              private eventsService: EventsService,
+              private authenticationService: AuthenticationService) {
   }
   ngOnInit() {
     $.getScript('../assets/js/material-dashboard.js');
     $.getScript('../assets/js/initMenu.js');
+    this.isLoggedIn = this.authenticationService.isLoggedIn();
+
+    let logoutEvent = this.eventsService.logoutEvent.createEvent(this);
+    logoutEvent.addListener(()=>{
+      this.isLoggedIn = false;
+    })
+
+    let loginEvent = this.eventsService.loginEvent.createEvent(this);
+    loginEvent.addListener(()=>{
+      this.isLoggedIn = true;
+    })
+
   }
   public isMaps(path) {
     let title = this.location.prepareExternalUrl(this.location.path());
@@ -173,4 +188,9 @@ export class AppComponent implements OnInit{
       return true;
     }
   }
+
+  // @HostListener('window:beforeunload', ['$event'])
+  // beforeunloadHandler(event) {
+  //   this.authenticationService.logout();
+  // }
 }
