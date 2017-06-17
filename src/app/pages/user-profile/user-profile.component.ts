@@ -13,7 +13,7 @@ import {UserDataAccessService} from "../../data-access/user-data-access.service"
 
 export class UserProfileComponent implements OnInit{
 
-  public loginUser:User = new User();
+  public selectedUser:User = new User();
   constructor(private userDataAccess: UserDataAccessService,
               private treeDataAccess: TreeDataAccessService,
               private commonService:CommonService,
@@ -21,13 +21,13 @@ export class UserProfileComponent implements OnInit{
   }
 
   async ngOnInit(){
-    this.loginUser = await this.authenticationService.getLoginUser();
+    this.selectedUser = await this.authenticationService.getLoginUser();
     // $.getScript('../../../assets/js/material-dashboard.js');
 
   }
 
   async update(){
-    await this.userDataAccess.put(this.loginUser._id, this.loginUser);
+    await this.userDataAccess.put(this.selectedUser._id, this.selectedUser);
     this.commonService.showNotification('Đã Cập Nhật Xong!', 'top','right', 'success')
   }
 

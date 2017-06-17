@@ -17,7 +17,7 @@ export class AddUserComponent implements OnInit {
 
   public topOfRoot: boolean= false;
   public user:User = new User();
-  public loginUser ;
+  public loginUser:User = new User();
   constructor(private userDataAccess: UserDataAccessService,
               private treeService: TreeService,
               private commonService:CommonService,
@@ -31,23 +31,25 @@ export class AddUserComponent implements OnInit {
 
   async createUser(){
 
-    this.userService.createUser(this.loginUser, this.user);
+    this.user  = await this.userService.createUser(this.loginUser, this.user);
+    let userId = this.user._id;
+      let result = this.authenticationService.grantPermission(userId,'member');
 
     //Todo Renew
 
     this.user = new User;
     this.commonService.showNotification('Tài khoản mới đã tạo thành công.', 'top','right', 'success')
-  }
 
-  async create1023User(){
-    let startTime = new Date().getMilliseconds();
-    for(let i =8 ;i<1050; i++ ){
-      this.user.username = "Name Name " +i
-      this.user.phone = i+"" +i+""+i
-      await this.createUser();
-    }
 
-    console.log('Time 1111111:'+(new Date().getMilliseconds() - startTime));
+  // async create1023User(){
+  //   let startTime = new Date().getMilliseconds();
+  //   for(let i =8 ;i<1050; i++ ){
+  //     this.user.username = "Name Name " +i
+  //     this.user.phone = i+"" +i+""+i
+  //     await this.createUser();
+  //   }
+  //
+  //   console.log('Time 1111111:'+(new Date().getMilliseconds() - startTime));
   }
 
 

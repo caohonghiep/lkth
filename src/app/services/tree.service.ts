@@ -5,6 +5,7 @@ import {Tree} from "../models/Tree";
 import {UserDataAccessService} from "../data-access/user-data-access.service";
 import {TreeDataAccessService} from "../data-access/tree-data-access.service";
 import {Queue} from "../models/Queue";
+import {config} from '../config';
 
 @Injectable()
 export class TreeService{
@@ -12,12 +13,47 @@ export class TreeService{
   private tree:Tree;
   constructor(private userDataAccess: UserDataAccessService, private treeDataAccess: TreeDataAccessService) {}
 
+
   maximumNodesInLevel(level) {
     let count = 1; // root node
     for (let i = 1; i <= level; i++) {
       count += Math.pow(2, i);
     }
     return count;
+  }
+
+  async getRefund(rootId){
+    let root = await this.treeDataAccess.get(rootId);
+    let sumRefund = 0;
+    let unitsRefund = config.refund;
+    let maximumLevel = Object.keys(unitsRefund).length-1;
+    let queue: Queue = new Queue();
+    root.level=0;
+    queue.push(root);
+
+    do {
+      let node = queue.pop();
+      sumRefund+= unitsRefund['level_'+node.level];
+      if(node.level < maximumLevel){
+        if (Array.isArray(node.childrenIds)) {
+          let loadChildrenProcess = node.childrenIds.map(childId => {
+            return this.treeDataAccess.get(childId);
+          });
+          let children = await Promise.all(loadChildrenProcess);
+          node.children = children.map(child=>{
+            child['level'] = node.level+1;
+            return child;
+          });
+          node.children.forEach(child => {
+            queue.push(child);
+          })
+
+        }
+      }
+
+    } while (queue.count() > 0);
+
+    return sumRefund;
   }
 
   async createNextTree(rootNodeId) {
@@ -78,7 +114,41 @@ export class TreeService{
 
   async getTree(rootId) {
     let root = await this.treeDataAccess.get(rootId);
-    let maximumNodes = this.maximumNodesInLevel(4);
+    let unitsRefund = config.refund;
+    let maximumLevel = Object.keys(unitsRefund).length-1;
+    let queue: Queue = new Queue();
+    root.level=0;
+    queue.push(root);
+    do {
+      let node = queue.pop();
+      if(node.level < maximumLevel) {
+        node.user = await this.userDataAccess.get(node.userId);
+        if (Array.isArray(node.childrenIds)) {
+          let loadChildrenProcess = node.childrenIds.map(childrenId => {
+            return this.treeDataAccess.get(childrenId);
+          });
+          let children = await Promise.all(loadChildrenProcess);
+          node.children = children.map(child=>{
+            child['level'] = node.level+1;
+            return child;
+          });
+          node.children.forEach(child => {
+            queue.push(child);
+          })
+
+        }
+      }
+    } while (queue.count() > 0);
+    return root;
+  }
+
+  async countDirectChildren(rootId){
+    let root = await this.treeDataAccess.get(rootId);
+    return Array.isArray(root.directChildrenIds)?root.directChildrenIds.length: 0;
+  }
+
+  async countChildren(rootId) {
+    let root = await this.treeDataAccess.get(rootId);
     let countNodes = 1;
     let queue: Queue = new Queue();
 
@@ -99,24 +169,9 @@ export class TreeService{
         })
 
       }
-    } while (queue.count() > 0 && countNodes < maximumNodes);
+    } while (queue.count() > 0);
 
-
-    // root.user = await this.userDataAccessService.get(root.userId);
-    // if(Array.isArray(root.childrenIds)){
-    //   let loadChildrenProcess =  root.childrenIds.map(childrenId=>{
-    //     return new Promise((resolve,reject)=>{
-    //       this.get(childrenId).then(child=>{
-    //         this.userDataAccessService.get(child.userId).then(user=>{
-    //           child.user =user;
-    //           resolve(child);
-    //         })
-    //       })
-    //     })
-    //   });
-    //   let children = await Promise.all(loadChildrenProcess);
-    //   root.children= children;
-    // }
-    return root;
+    return countNodes;
   }
+
 }

@@ -346,7 +346,7 @@ export class UsersDiagramComponent implements OnInit {
       node = queue.pop();
       node.user = await this.userDataAccess.get(node.userId);
       node.text = {
-        name: node.user.memberId?'Mã số: ' + node.user.memberId :'',
+        name: (node.user.memberId?'Mã số: ' + node.user.memberId :'')+ (node.level?'('+node.level+')':''),
         title: node.user.username?'Tên: ' + node.user.username:'',
         contact: node.user.phone?'Số ĐT: ' + node.user.phone:''
       }
@@ -360,7 +360,7 @@ export class UsersDiagramComponent implements OnInit {
       node.image= './assets/headshots/2.jpg';
       node.HTMLclass= 'light-gray';
 
-      if(Array.isArray(node.children)){
+      if(Array.isArray(node.children) && node.children.length > 0){
         node.collapsed = true;
         node.children.forEach(child=>{
           queue.push(child);

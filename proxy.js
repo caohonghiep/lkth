@@ -5,7 +5,6 @@
 var vhost = {
 	'www.giaothoa.com':'http://localhost:3000/',
   'giaothoa.com':'http://localhost:3000/'
-
 };
 //setup virtual domain
 var http = require('http');

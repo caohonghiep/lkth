@@ -1,0 +1,39 @@
+<div class="main-content fixed-top" >
+  <div class="container-fluid ">
+    <div class="row">
+      <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 center-block">
+        <div class="card">
+          <div class="card-header" data-background-color="purple">
+            <h4 class="title">Thông Tin Đăng Nhập</h4>
+            <!--<p class="category">Thông tin cá nhân của hội viên mới.</p>-->
+          </div>
+          <div class="card-content">
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group form-black label-floating is-empty">
+                  <label class="control-label">Mã Số Hội Viên hoặc Email</label>
+                  <input type="text" class="form-control" [(ngModel)]="memberOrEmail" required="true">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group form-black label-floating is-empty">
+                  <label class="control-label">Mật Khẩu</label>
+                  <input type="password" class="form-control" [(ngModel)]="password" required="true">
+                </div>
+              </div>
+            </div>
+
+            <button [disabled]="!(password && memberOrEmail)"
+                    class="btn btn-danger pull-right" (click)="login()">Đăng Nhập</button>
+            <div class="clearfix"></div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

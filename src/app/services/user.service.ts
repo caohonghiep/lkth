@@ -22,5 +22,7 @@ export class UserService{
     newUser.treeIds = [newTree._id];
     let createUserResult = await this.userDataAccess.post(newUser);
     await this.treeDataAccess.put(newTree._id, {'userId':createUserResult.id});
+    newUser = await this.userDataAccess.get(createUserResult.id)
+    return newUser;
   }
 }

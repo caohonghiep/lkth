@@ -28,20 +28,20 @@
                 <div class="col-md-4">
                   <div class="form-group form-black label-floating is-empty">
                     <label class="control-label"> Mã Số Hội Viên </label>
-                    <input type="text" class="form-control" [(ngModel)]="loginUser.memberId" >
+                    <input type="text" class="form-control" [(ngModel)]="selectedUser.memberId" >
                   </div>
                 </div>
 
                 <div class="col-md-4">
                   <div class="form-group form-black label-floating is-empty">
                     <label class="control-label"> Họ và Tên</label>
-                    <input type="text" class="form-control"  [(ngModel)]="loginUser.username" >
+                    <input type="text" class="form-control"  [(ngModel)]="selectedUser.username" >
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group form-black label-floating is-empty">
                     <label class="control-label"> Ngày sinh</label>
-                    <input type="date" class="form-control" [(ngModel)]="loginUser.birthday">
+                    <input type="date" class="form-control" [(ngModel)]="selectedUser.birthday">
                   </div>
                 </div>
               </div>
@@ -49,13 +49,13 @@
               <div class="col-md-6">
                 <div class="form-group form-black label-floating is-empty">
                   <label class="control-label"> Số Điện Thoại </label>
-                  <input type="text" class="form-control" [(ngModel)]="loginUser.phone" >
+                  <input type="text" class="form-control" [(ngModel)]="selectedUser.phone" >
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group form-black label-floating is-empty">
                   <label class="control-label"> Email </label>
-                  <input type="text" class="form-control" [(ngModel)]="loginUser.email"  >
+                  <input type="text" class="form-control" [(ngModel)]="selectedUser.email"  >
                 </div>
               </div>
             </div>
@@ -63,21 +63,21 @@
                 <div class="col-md-4">
                   <div class="form-group form-black label-floating is-empty">
                     <label class="control-label">CMND</label>
-                    <input type="text" class="form-control" [(ngModel)]="loginUser.identityNumber">
+                    <input type="text" class="form-control" [(ngModel)]="selectedUser.identityNumber">
                   </div>
                 </div>
 
                 <div class="col-md-4">
                   <div class="form-group form-black label-floating is-empty">
                     <label class="control-label">Ngày cấp</label>
-                    <input type="date" class="form-control" [(ngModel)]="loginUser.identityIssueDate">
+                    <input type="date" class="form-control" [(ngModel)]="selectedUser.identityIssueDate">
                   </div>
                 </div>
 
                 <div class="col-md-4">
                   <div class="form-group form-black label-floating is-empty">
                     <label class="control-label">Nơi cấp</label>
-                    <input type="text" class="form-control" [(ngModel)]="loginUser.identityIssuedBy">
+                    <input type="text" class="form-control" [(ngModel)]="selectedUser.identityIssuedBy">
                   </div>
                 </div>
               </div>
@@ -86,7 +86,7 @@
                 <div class="col-md-12">
                   <div class="form-group form-black label-floating is-empty">
                     <label class="control-label">Địa chỉ Thường Trú</label>
-                    <input type="text" class="form-control" [(ngModel)]="loginUser.permanentAddress">
+                    <input type="text" class="form-control" [(ngModel)]="selectedUser.permanentAddress">
                   </div>
                 </div>
               </div>
@@ -95,7 +95,7 @@
                 <div class="col-md-12">
                   <div class="form-group form-black label-floating is-empty">
                     <label class="control-label"> Địa chỉ Tạm Trú</label>
-                    <input type="text" class="form-control" [(ngModel)]="loginUser.temporaryAddress">
+                    <input type="text" class="form-control" [(ngModel)]="selectedUser.temporaryAddress">
                   </div>
                 </div>
               </div>
@@ -117,14 +117,14 @@
                 <div class="col-md-12">
                   <div class="form-group form-black label-floating is-empty">
                     <label class="control-label">Tên Ngân Hàng</label>
-                    <input type="text" class="form-control" [(ngModel)]="loginUser.bankName" >
+                    <input type="text" class="form-control" [(ngModel)]="selectedUser.bankName" >
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-group form-black label-floating is-empty">
                     <label class="control-label">Chi Nhánh</label>
-                    <input type="text" class="form-control" [(ngModel)]="loginUser.bankBranchName">
+                    <input type="text" class="form-control" [(ngModel)]="selectedUser.bankBranchName">
                   </div>
                 </div>
               </div>
@@ -133,14 +133,14 @@
                 <div class="col-md-12">
                   <div class="form-group form-black label-floating is-empty">
                     <label class="control-label">Mã Số Tài Khoản</label>
-                    <input type="text" class="form-control" [(ngModel)]="loginUser.bankAccountNumber">
+                    <input type="text" class="form-control" [(ngModel)]="selectedUser.bankAccountNumber">
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-group form-black label-floating is-empty">
                     <label class="control-label">Tên Chủ Tài Khoản</label>
-                    <input type="text" class="form-control" [(ngModel)]="loginUser.bankAccountName">
+                    <input type="text" class="form-control" [(ngModel)]="selectedUser.bankAccountName">
                   </div>
                 </div>
               </div>

@@ -2,6 +2,7 @@ import {EventEmitter, Injectable} from '@angular/core';
 import * as PouchDB from 'pouchdb';
 import * as pouchDBFind from 'pouchdb-find';
 import {Model} from "../models/Model";
+import {config} from '../config';
 //https://blog.couchbase.com/using-couchbase-mobile-in-a-web-application-with-only-angular-2-and-pouchdb/
 //@Injectable()
 PouchDB.plugin(pouchDBFind);
@@ -24,7 +25,7 @@ export class DataAccessService<T extends Model> {
     console.log('init data: %s', this.databaseName);
     PouchDB.debug.enable('*');
     this.db = new PouchDB(this.databaseName);
-    this.serverDB = new PouchDB('http://localhost:5984/' + this.databaseName);
+    this.serverDB = new PouchDB(config.database.server+'/' + this.databaseName);
     //this.synchronize(true);
   }
 
@@ -56,7 +57,9 @@ export class DataAccessService<T extends Model> {
         console.log('replicate error: %s', JSON.stringify(err));
       });
     }else{
-      this.sync.cancel();
+      if(this.sync) {
+        this.sync.cancel();
+      }
     }
   }
 
@@ -87,7 +90,9 @@ export class DataAccessService<T extends Model> {
         console.log('replicate error: %s', JSON.stringify(err));
       });
     }else{
-      this.repl.cancel();
+      if(this.repl) {
+        this.repl.cancel();
+      }
     }
 
   }
@@ -105,6 +110,7 @@ export class DataAccessService<T extends Model> {
       let doc = await this.db.get(_id);
       return doc;
     } catch (err) {
+      console.log('get %s error _id: %s',this.databaseName, _id)
       console.log(err);
       return null;
     }
